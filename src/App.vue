@@ -2,17 +2,17 @@
 <div class="column items-end justify-end contend-end bg-grey-13" style="height: 1000px; width: 100%">
   <div position="botton-right" class="q-pa-md q-gutter-sm self-end " style="height: 400px; max-height: 80vh; max-width: 400px;">
     <q-btn-dropdown
-      class="bottom-right q-ma-md "
+      class="bot_button bottom-right q-ma-md "
       fab
       color="blue-9"
       dropdown-icon="mail"
-    >   <q-list>
+    > <q-list>
         <q-item-section >
-          <q-item-label style="height: 400px; max-height: 400px; max-width: 400px; overflow-y: auto; overflow-x: hidden">
+          <q-item-label style="height: 400px; max-height: 400px; max-width: 250px; ">
                 <div style="width: 100%; max-width: 400px">
-                  <q-scroll-area ref="scrollArea" style="width: 400px; height: 400px;" class="scroll overflow-hidden">
+                  <q-scroll-area ref="scrollArea" style="width: 263px; height: 400px;" class="scroll overflow-hidden">
                     <q-chat-message class="message-window"
-                      style="width: 385px"
+                      style="width: 243px"
                       v-for="(message, index) in messages"
                       :avatar="('Вы' !== message.name) ? require('./assets/deadpool.jpg') : undefined"
                       :key="index"
@@ -22,17 +22,15 @@
                     </q-chat-message>
                   </q-scroll-area>
               </div>
-
           </q-item-label>
           <q-input  v-model="message"  @keyup.enter="sendMessage" class="mess">
-              <template v-slot:append>
-                <q-icon v-if="message !== ''" name="close" @click="message = ''" class="cursor-pointer" color="black"/>
-              </template>
-              <template v-slot:after>
-                <q-btn  color='white' bg-color='primary' round dense flat icon="send" @click="sendMessage" />
-              </template>
+            <template v-slot:append>
+              <q-icon name="close" @click="message = ''" class="cursor-pointer" />
+            </template>
+            <template v-slot:after>
+              <q-btn  color='white' bg-color='primary' round dense flat icon="send" @click="sendMessage" />
+            </template>
           </q-input>
-
         </q-item-section>
       </q-list>
     </q-btn-dropdown>
@@ -53,7 +51,7 @@ export default {
       messages: [
         {
           name: 'Бот',
-          message: 'Привет,я бот тех поддержк \n С чем тебе помочь'
+          message: 'Привет,я бот тех поддержк. С чем тебе помочь?'
         }],
       message: '',
       socket: io('http://10.86.29.41:5005')
@@ -106,6 +104,9 @@ export default {
 .text{
   display: block;
 }
+.q-message-text:last-child {
+    max-width: 200px;
+}
 .q-message-text--received{
   background: rgb(145, 36, 36)!important;
 }
@@ -144,6 +145,9 @@ export default {
   background: cornsilk;
 }
 a {
-  color: red
+  color: wheat
+}
+.scroll{
+  -webkit-overflow-scrolling: auto;
 }
 </style>
